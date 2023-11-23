@@ -1,0 +1,168 @@
+
+
+
+pci-admin@test121:~/KBA-CHF/KBA-Electronics/Client$ go run .
+
+-->Submiting Transaction: GetAllAppliances,
+[
+  {
+    "AssetType": "appliance",
+    "ApplianceId": "SamsungRX",
+    "Color": "RED",
+    "DateOfManufacture": "10/04/2020",
+    "OwnedBy": "HYDF-1",
+    "Make": "TV64",
+    "Model": "SS121",
+    "Status": "In Factory"
+  },
+  {
+    "AssetType": "appliance",
+    "ApplianceId": "Samsung",
+    "Color": "RED",
+    "DateOfManufacture": "10/04/2020",
+    "OwnedBy": "HYDF-1",
+    "Make": "TV75",
+    "Model": "ss1",
+    "Status": "In Factory"
+  },
+  {
+    "AssetType": "appliance",
+    "ApplianceId": "Oneplus",
+    "Color": "BLUE",
+    "DateOfManufacture": "10/04/2020",
+    "OwnedBy": "HYDF-2",
+    "Make": "Mobile",
+    "Model": "One1",
+    "Status": "In Factory"
+  },
+  {
+    "AssetType": "appliance",
+    "ApplianceId": "LG-XXXX",
+    "Color": "RED",
+    "DateOfManufacture": "10/04/2020",
+    "OwnedBy": "HYDF-1",
+    "Make": "LG",
+    "Model": "Refrigirator",
+    "Status": "In Factory"
+  },
+  {
+    "AssetType": "appliance",
+    "ApplianceId": "LG",
+    "Color": "BLUE",
+    "DateOfManufacture": "10/04/2020",
+    "OwnedBy": "HYDF-2",
+    "Make": "TV75",
+    "Model": "LG1",
+    "Status": "In Factory"
+  },
+  {
+    "AssetType": "appliance",
+    "ApplianceId": "Hair",
+    "Color": "BLUE",
+    "DateOfManufacture": "10/04/2020",
+    "OwnedBy": "HYDF-2",
+    "Make": "TV32",
+    "Model": "HR1",
+    "Status": "In Factory"
+  }
+]
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+npci-admin@test121:~/KBA-CHF/KBA-Electronics/Client$ go run .
+
+-->Submiting Transaction: GetAllOrders,
+[
+  {
+    "assetType": "Order",
+    "color": "Red",
+    "ecomName": "Popular",
+    "make": "Maruti",
+    "model": "Alto",
+    "orderID": "LG1"
+  },
+  {
+    "assetType": "Order",
+    "color": "Red",
+    "ecomName": "Popular",
+    "make": "Maruti",
+    "model": "Alto",
+    "orderID": "LG2"
+  },
+  {
+    "assetType": "Order",
+    "color": "Red",
+    "ecomName": "Popular",
+    "make": "LG INDIA",
+    "model": "TV",
+    "orderID": "LG222"
+  },
+  {
+    "assetType": "Order",
+    "color": "BLUE",
+    "ecomName": "Popular",
+    "make": "LG",
+    "model": "LG1",
+    "orderID": "ORD1"
+  },
+  {
+    "assetType": "Order",
+    "color": "RED",
+    "ecomName": "Popular",
+    "make": "Samsung",
+    "model": "ss1",
+    "orderID": "ORD2"
+  },
+  {
+    "assetType": "Order",
+    "color": "BLUE",
+    "ecomName": "Popular",
+    "make": "Hair",
+    "model": "HR1",
+    "orderID": "ORD3"
+  },
+  {
+    "assetType": "Order",
+    "color": "BLUE",
+    "ecomName": "Popular",
+    "make": "Oneplus",
+    "model": "One1",
+    "orderID": "ORD4"
+  }
+]
+
+Create 
+PutState()
+
+Delete
+DeleteState(ID)
+
+Range
+GetStateByRange(startkey,endkey)
+
+History
+GetHistoryForKey(ID)
+
+Pagination
+GetQueryResultWithPagination(QueryString,pageSize,bookmark)
+
+Matching Orders
+GetPrivateDataQueryResult(collectionName,querystring)
+
+Match order and appliancs
+GetPrivateData(collectionName,ID)
+
+
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["ApplianceContract:GetAppliancesByRange", "Appliance-01", "Appliance-03"]}'
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["ApplianceContract:GetApplianceHistory", "Appliance-01"]}'
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C autochannel -n KBA-Automobile --peerAddresses localhost:7051 --tlsRootCertFiles $ORG1_PEER_TLSROOTCERT --peerAddresses localhost:9051 --tlsRootCertFiles $ORG2_PEER_TLSROOTCERT -c '{"Args":["ApplianceContract:DeleteAppliance","Appliance-01"]}'
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["ApplianceContract:GetApplianceHistory", "Appliance-01"]}'
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["ApplianceContract:GetAppliancesByRange", "Appliance-03", ""]}'
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["ApplianceContract:GetAppliancesByRange", "", "Appliance-03"]}'
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["ApplianceContract:GetAppliancesByRange", "", ""]}'
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["ApplianceContract:GetAllAppliances"]}'
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["ApplianceContract:GetAppliancesWithPagination", "10", ""]}'
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["OrderContract:GetAllOrders"]}'
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["OrderContract:GetOrdersByRange","",""]}'
+peer chaincode query -C autochannel -n KBA-Automobile -c '{"Args":["GetMatchingOrders", "APPLIANCE01"]}'
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C autochannel -n KBA-Automobile --peerAddresses localhost:7051 --tlsRootCertFiles $ORG1_PEER_TLSROOTCERT --peerAddresses localhost:9051 --tlsRootCertFiles $ORG2_PEER_TLSROOTCERT -c '{"function":"MatchOrder","Args":["APPLIANCE01","ORD01"]}'
